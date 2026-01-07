@@ -147,3 +147,13 @@ go run <filename.go>
 ### for
 ## Pointers
 ## Functions
+    - Named Results
+    - Variadic functions
+    - Anonymous functions
+        - nested functions
+        - cannot have any name
+        - they have to be immediately executed
+    - Higher Order Functions (treat functions as data)
+        - Assign "function" as a value to a variable
+        - Pass functions as arguments to other functions
+        - Return functions as return values
