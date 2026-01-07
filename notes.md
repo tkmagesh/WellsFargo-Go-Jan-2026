@@ -45,12 +45,50 @@
 ### Compilation
 ```shell
 go build <filename.go>
+
+# To create a binary in a different name
+go build -o <binary_name> <filename.go>
+```
+
+### Cross Compilation
+#### To get the list of supported platforms
+```shell
+go tool dist list
+```
+
+#### To list all the environment variables (go tool)
+```shell
+go env
+```
+
+#### To list specific environment variables
+```shell
+go env <var_1> <var_2> ....
+```
+
+#### To change the env variables
+```shell
+go env -w <var_1>=<new_value_1> <var_2>=<new_value_2> ...
+```
+
+#### Cross Compile (mac/unix/linux)
+```shell
+GOOS=<target_os> GOARCH=<target_arch> go build <filename.go>
+```
+
+#### In windows (powershell)
+```powershell
+$env:GOOS="windows"; $env:GOARCH="amd64"; go build <filename.go>
 ```
 
 ### Compile & Execute 
 ```shell
 go run <filename.go>
 ```
+
+### Standard Library Documentation
+- https://pkg.go.dev/std
+
 
 ## Data Types
 ## Variables & Constants
