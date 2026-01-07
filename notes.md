@@ -47,6 +47,11 @@
 go build <filename.go>
 ```
 
+### Compile & Execute 
+```shell
+go run <filename.go>
+```
+
 ## Data Types
 ## Variables & Constants
 ## IOTA
