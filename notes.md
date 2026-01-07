@@ -90,8 +90,56 @@ go run <filename.go>
 - https://pkg.go.dev/std
 
 
+
 ## Data Types
+- string
+- bool
+- integers family
+    - int8
+    - int16
+    - int32
+    - int64
+    - int
+- unsigned integers family
+    - uint8
+    - uint16
+    - uint32
+    - uint64
+    - uint
+- floating points family
+    - float32
+    - float64
+- complex family
+    - complex64 ( real[float32] + imaginary[float32] )
+    - complex128 ( real[float64] + imaginary[float64] )
+- aliases
+    - byte (alias for unsigned int)
+    - rune (alias for unicode code point)
+
+### Zero values
+| Data Type | Zero value |
+------------ | ------------- |
+|int family     | 0 |
+|uint family    | 0 |
+|complex family | (0+0i) |
+|string         | "" (empty string) |
+|bool           | false |
+|byte           | 0 |
+|interface      | nil |
+|pointer        | nil |
+|function       | nil |
+|struct         | struct instance |
+
+
 ## Variables & Constants
+
+### Function Scope
+- CAN use ":="
+- CANNOT have unused variables
+### Package Scope
+- CANNOT use ":="
+- CAN have unused variables
+
 ## IOTA
 ## Programming Constructs
 ### if else
