@@ -167,3 +167,5 @@ go run <filename.go>
 - Slice maintains a pointer to an underlying array
 ![image](./images/slices.png)
 ### Map
+- Typed collection of key/value pairs
+
