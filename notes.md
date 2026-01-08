@@ -176,3 +176,12 @@ go run <filename.go>
     - errors.New()
     - fmt.Errorf()
     - Custom type implementing the "error" interface
+
+## Panic & Recovery
+### Panic
+- Represents the state of the application where the application execution cannot proceed further
+- When the panic occurs, the application is shutdown AFTER all the deferred functions are executed
+- use "panic(error)" to raise a panic
+
+### Recovery
+- Use "recover()" to recover from a panic
