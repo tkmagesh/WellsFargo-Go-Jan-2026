@@ -157,3 +157,4 @@ go run <filename.go>
         - Assign "function" as a value to a variable
         - Pass functions as arguments to other functions
         - Return functions as return values
+    - Deferred functions
