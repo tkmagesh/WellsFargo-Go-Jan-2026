@@ -158,3 +158,9 @@ go run <filename.go>
         - Pass functions as arguments to other functions
         - Return functions as return values
     - Deferred functions
+
+## Collections
+### Array
+- Fixed sized typed collection
+### Slice
+### Map
