@@ -6,20 +6,24 @@ import (
 )
 
 type Operation func(int, int)
+type OperationWrapper func(oper Operation) Operation
 
 func main() {
 
-	/*
-		add := getLogOperation(add)
-		subtract := getLogOperation(subtract)
-	*/
-
-	add := getProfiledOperation(getLogOperation(add))
-	subtract := getProfiledOperation(getLogOperation(subtract))
+	add := wrapOperation(add, profileWrapper, logWrapper)
+	subtract := wrapOperation(subtract, profileWrapper, logWrapper)
 
 	add(100, 200)
 	subtract(100, 200)
 
+}
+
+func wrapOperation(oper Operation, wrapers ...OperationWrapper) Operation {
+	for i := len(wrapers) - 1; i >= 0; i-- {
+		wrapper := wrapers[i]
+		oper = wrapper(oper)
+	}
+	return oper
 }
 
 func add(x, y int) {
@@ -30,8 +34,7 @@ func subtract(x, y int) {
 	fmt.Println("Subtract Result :", x-y)
 }
 
-// func getLogOperation(oper func(int, int)) func(int, int) {
-func getLogOperation(oper Operation) Operation {
+func logWrapper(oper Operation) Operation {
 	return func(x, y int) {
 		fmt.Println("Operation started...")
 		oper(x, y)
@@ -39,8 +42,7 @@ func getLogOperation(oper Operation) Operation {
 	}
 }
 
-// func getProfiledOperation(oper func(int, int)) func(int, int) {
-func getProfiledOperation(oper Operation) Operation {
+func profileWrapper(oper Operation) Operation {
 	return func(x, y int) {
 		start := time.Now()
 		oper(x, y)
