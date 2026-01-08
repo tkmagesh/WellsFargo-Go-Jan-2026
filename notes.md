@@ -185,3 +185,35 @@ go run <filename.go>
 
 ### Recovery
 - Use "recover()" to recover from a panic
+
+## Modules & Packages
+### Module
+- Any code that need to be versioned and deployed together
+- Typically a folder with "go.mod" file
+- `go.mod` file (manifest file of the application)
+    - name of the module
+        - should include the repo path
+    - go runtime version targetted
+    - references to other open source libraries & framewors used by the module
+
+#### Create a module
+```shell
+go mod init <module_name>
+```
+
+#### Execute a module
+```shell
+go run .
+```
+
+#### Build a module
+```shell
+go build .
+# 
+go build -o <binary_name> .
+```
+
+
+### Package
+- Internal orgaization of code in a module
+- typically folders
