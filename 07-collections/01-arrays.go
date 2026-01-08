@@ -40,11 +40,19 @@ func main() {
 	// the nos array
 	nos = [5]int{3, 1, 4, 2, 5}
 	fmt.Println("Before sorting, nos =", nos)
-	sort( /* ? */ )
+	fmt.Printf("[main] &nos = %p\n", &nos)
+	sort(&nos)
 	fmt.Println("After sorting, nos =", nos)
 }
 
-func sort( /* ?  */ ) /* return return values */ {
+func sort(list *[5]int) /* return return values */ {
 	// bubble sort
-	/* ? */
+	fmt.Printf("[sort] &list = %p\n", list)
+	for i := 0; i < 4; i++ {
+		for j := i + 1; j <= 4; j++ {
+			if list[i] > list[j] {
+				list[i], list[j] = list[j], list[i]
+			}
+		}
+	}
 }
