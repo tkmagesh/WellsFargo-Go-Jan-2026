@@ -37,15 +37,15 @@ func main() {
 	// members of a pointer to a container can be accessed directly without explicit dereferencing
 	fmt.Println("nosPtr[0] =", nosPtr[0])
 
-	// the nos array
+	// reset the nos array
 	nos = [5]int{3, 1, 4, 2, 5}
 	fmt.Println("Before sorting, nos =", nos)
 	fmt.Printf("[main] &nos = %p\n", &nos)
-	sort(&nos)
+	sortArray(&nos)
 	fmt.Println("After sorting, nos =", nos)
 }
 
-func sort(list *[5]int) /* return return values */ {
+func sortArray(list *[5]int) /* return return values */ {
 	// bubble sort
 	fmt.Printf("[sort] &list = %p\n", list)
 	for i := 0; i < 4; i++ {

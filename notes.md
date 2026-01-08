@@ -163,4 +163,7 @@ go run <filename.go>
 ### Array
 - Fixed sized typed collection
 ### Slice
+- Varrying sized typed collection
+- Slice maintains a pointer to an underlying array
+![image](./images/slices.png)
 ### Map
