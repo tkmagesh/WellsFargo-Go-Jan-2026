@@ -169,3 +169,10 @@ go run <filename.go>
 ### Map
 - Typed collection of key/value pairs
 
+## Error Handling
+- Errors are values returned from a function (non "thrown")
+- In practice, error objects in Go must implement "error" interface
+- Creation
+    - errors.New()
+    - fmt.Errorf()
+    - Custom type implementing the "error" interface
