@@ -260,3 +260,7 @@ go mod why github.com/mattn/go-isatty
 
 ## Method
 - Function WITH a receiver
+
+## Interfaces
+- Interfaces are 'implicitly' implemented
+- Interfaces can be composed
