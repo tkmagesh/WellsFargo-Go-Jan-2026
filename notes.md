@@ -217,3 +217,40 @@ go build -o <binary_name> .
 ### Package
 - Internal orgaization of code in a module
 - typically folders
+
+### Using OSS packages
+#### To add a dependency
+```shell
+go get github.com/fatih/color
+```
+Dependencies are downloaded in the `GOPATH/pkg/mod` folder
+
+#### To upgrade a dependency
+```shell
+go get -u github.com/fatih/color
+```
+
+#### To upgrade all the dependencies (in go.mod file)
+```shell
+go get -u
+```
+
+#### To update the go.mod file
+```shell
+go mod tidy
+```
+
+#### To download the dependencies documented in the go.mod file
+```shell
+go mod download
+```
+
+#### To list the dependency graph
+```shell
+go mod graph
+```
+
+#### To get the dependency hierarchy
+```shell
+go mod why github.com/mattn/go-isatty
+```
