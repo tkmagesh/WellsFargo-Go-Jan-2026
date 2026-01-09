@@ -264,3 +264,6 @@ go mod why github.com/mattn/go-isatty
 ## Interfaces
 - Interfaces are 'implicitly' implemented
 - Interfaces can be composed
+
+## Concurrency
+The design of an application in such a way that it has "more than one execution path"
