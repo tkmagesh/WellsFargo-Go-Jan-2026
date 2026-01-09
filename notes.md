@@ -255,5 +255,8 @@ go mod graph
 go mod why github.com/mattn/go-isatty
 ```
 
-## struct
+## Struct
 - User defined Data Type
+
+## Method
+- Function WITH a receiver

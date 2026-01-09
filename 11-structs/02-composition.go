@@ -22,6 +22,7 @@ func NewPerishableProduct(id int, name string, cost float64, expiry string) *Per
 			Cost: cost,
 		},
 		Expiry: expiry,
+		Id:     int,
 	}
 }
 
@@ -43,5 +44,6 @@ func main() {
 	fmt.Println(milk.Cost)
 
 	bread := NewPerishableProduct(101, "Bread", 40, "7 Days")
+	fmt.Println(bread)
 
 }
