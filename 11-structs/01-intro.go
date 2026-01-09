@@ -35,16 +35,16 @@ func main() {
 	fmt.Println("Accessing the attributes through the pointer")
 	fmt.Printf("p1Ptr.Id = %d, p1Ptr.Name = %q, p1Ptr.Cost = %0.02f\n", p1Ptr.Id, p1Ptr.Name, p1Ptr.Cost)
 
-	fmt.Println("Before applying discount :", Format( /* ? */ ))
-	ApplyDiscount( /* ?,? */ )
-	fmt.Println("After applying discount :", Format( /* ? */ ))
+	fmt.Println("Before applying discount :", Format(p1))
+	ApplyDiscount(&p1, 10)
+	fmt.Println("After applying discount :", Format(p1))
 }
 
-func Format( /* product */ ) string {
+func Format(p Product) string {
 	// return a formatted string of the product
-	// ex "Id = %d, Name = %q, Cost = %0.02f"
+	return fmt.Sprintf("Id = %d, Name = %q, Cost = %0.02f", p.Id, p.Name, p.Cost)
 }
 
-func ApplyDiscount( /* product, discountPercentage */ ) /* no return results */ {
-	// update the product cost by applying the discount
+func ApplyDiscount(p *Product, discountPercentage float64) /* no return results */ {
+	p.Cost = p.Cost * ((100 - discountPercentage) / 100)
 }
