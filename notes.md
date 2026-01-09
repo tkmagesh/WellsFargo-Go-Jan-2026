@@ -254,3 +254,6 @@ go mod graph
 ```shell
 go mod why github.com/mattn/go-isatty
 ```
+
+## struct
+- User defined Data Type
