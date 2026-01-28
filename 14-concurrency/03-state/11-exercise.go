@@ -11,6 +11,9 @@ Refactor the below in such a way that the identified prime numbers are printed i
 
 */
 
+var primes []int
+var mutex sync.Mutex
+
 func main() {
 	var start, end int
 	fmt.Println("Enter the start and end")
@@ -21,6 +24,9 @@ func main() {
 		go checkPrime(no, wg)
 	}
 	wg.Wait()
+	for _, primeNo := range primes {
+		fmt.Println("Prime No :", primeNo)
+	}
 }
 
 func checkPrime(no int, wg *sync.WaitGroup) {
@@ -30,5 +36,9 @@ func checkPrime(no int, wg *sync.WaitGroup) {
 			return
 		}
 	}
-	fmt.Println("Prime No :", no)
+	mutex.Lock()
+	{
+		primes = append(primes, no)
+	}
+	mutex.Unlock()
 }
