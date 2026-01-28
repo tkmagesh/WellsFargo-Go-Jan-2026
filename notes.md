@@ -268,6 +268,9 @@ go mod why github.com/mattn/go-isatty
 ## Concurrency
 The design of an application in such a way that it has "more than one execution path"
 
+**Reference:**
+- https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html
+
 ### Channel
 - `Share memory by communicating` strategy
 - Data Type to enable communication between goroutines
