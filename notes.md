@@ -267,3 +267,37 @@ go mod why github.com/mattn/go-isatty
 
 ## Concurrency
 The design of an application in such a way that it has "more than one execution path"
+
+### Channel
+- `Share memory by communicating` strategy
+- Data Type to enable communication between goroutines
+
+#### Declaration
+```go
+var ch chan int
+```
+#### Initialization
+```go
+ch = make(chan int)
+```
+#### Declaration & Initialization
+```go
+var ch chan int = make(chan int)
+// OR
+var ch = make(chan int)
+// OR
+ch := make(chan int)
+```
+
+#### Channel Operation
+- using `<-` operator
+
+##### Send Operation
+```go
+ch <- 100
+```
+
+##### Receive Operation
+```go
+data := <- ch
+```
