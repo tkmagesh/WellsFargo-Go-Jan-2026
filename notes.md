@@ -332,7 +332,7 @@ data := <- ch
 - `sqlx` package
     - simplifies database programming
     - high level wrapper on top of database/sql package
-- `sqlc` package
+- `sqlc` package (https://docs.sqlc.dev/en/latest/index.html)
     - code generator
 - `gorm` package
     - ORM implementation in GO
