@@ -334,5 +334,5 @@ data := <- ch
     - high level wrapper on top of database/sql package
 - `sqlc` package (https://docs.sqlc.dev/en/latest/index.html)
     - code generator
-- `gorm` package
+- `gorm` package (https://gorm.io/index.html)
     - ORM implementation in GO
