@@ -336,3 +336,6 @@ data := <- ch
     - code generator
 - `gorm` package (https://gorm.io/index.html)
     - ORM implementation in GO
+
+## Testing
+- gotest (https://github.com/rakyll/gotest)
