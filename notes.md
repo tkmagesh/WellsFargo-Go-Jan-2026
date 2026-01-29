@@ -323,3 +323,6 @@ data := <- ch
     - Wrapper on `context.WithDeadline()`
 - `context.WithDeadline(ctx, time.Time)`
     - Relative time based cancellation
+- `context.WithValue(ctx, key, value)`
+    - Share data across context hierarchies
+    - Non cancellable
