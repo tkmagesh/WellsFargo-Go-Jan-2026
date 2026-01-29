@@ -326,3 +326,13 @@ data := <- ch
 - `context.WithValue(ctx, key, value)`
     - Share data across context hierarchies
     - Non cancellable
+
+## Database Programming
+- `database/sql` package
+- `sqlx` package
+    - simplifies database programming
+    - high level wrapper on top of database/sql package
+- `sqlc` package
+    - code generator
+- `gorm` package
+    - ORM implementation in GO
