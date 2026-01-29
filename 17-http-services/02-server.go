@@ -1,10 +1,12 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 )
 
 type Product struct {
@@ -22,17 +24,28 @@ var products []Product = []Product{
 	{104, "Mouse", 400, true},
 }
 
+type HandlerFn func(http.ResponseWriter, *http.Request)
+
 type AppServer struct {
-	routes map[string]func(w http.ResponseWriter, r *http.Request)
+	routes      map[string]HandlerFn
+	middlewares []func(HandlerFn) HandlerFn
 }
 
-func (appServer *AppServer) AddHandler(path string, handlerFn func(w http.ResponseWriter, r *http.Request)) {
+func (appServer *AppServer) AddHandler(path string, handlerFn HandlerFn) {
+	for i := len(appServer.middlewares) - 1; i >= 0; i-- {
+		handlerFn = appServer.middlewares[i](handlerFn)
+	}
 	appServer.routes[path] = handlerFn
+}
+
+func (appServer *AppServer) AddMiddleware(middleware func(HandlerFn) HandlerFn) {
+	appServer.middlewares = append(appServer.middlewares, middleware)
 }
 
 func NewAppServer() *AppServer {
 	return &AppServer{
-		routes: make(map[string]func(w http.ResponseWriter, r *http.Request)),
+		routes:      make(map[string]HandlerFn),
+		middlewares: make([]func(HandlerFn) HandlerFn, 0),
 	}
 }
 
@@ -47,7 +60,10 @@ func (appServer *AppServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 // Application specific logic
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Hello, World!")
+	msg := GenerateGreet(r.Context())
+	if r.Context().Err() == nil {
+		fmt.Fprintln(w, msg)
+	}
 }
 
 func ProductsHandler(w http.ResponseWriter, r *http.Request) {
@@ -75,30 +91,52 @@ func CustomersHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "The list of customers will be served")
 }
 
-/*
-// http.Handler interface implementation
-func (appServer *AppServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	// w.Write([]byte("Hello, World!"))
-
-	// log the request
-	fmt.Printf("%s - %s\n", r.Method, r.URL.Path)
-
-	// serve the request
-	switch r.URL.Path {
-	case "/":
-
-	case "/products":
-
-	case "/customers":
-
-	default:
-		http.Error(w, "Resource not found", http.StatusNotFound)
+// Cross cutting concerns
+func logWrapper(handlerFn HandlerFn) HandlerFn {
+	return func(w http.ResponseWriter, r *http.Request) {
+		fmt.Printf("%s - %s\n", r.Method, r.URL.Path)
+		handlerFn(w, r)
 	}
+}
 
-} */
+func timeoutWrapper(handlerFn HandlerFn) HandlerFn {
+	return func(w http.ResponseWriter, r *http.Request) {
+		ctx, cancel := context.WithTimeout(r.Context(), 3*time.Second)
+		defer cancel()
+		handlerFn(w, r.WithContext(ctx))
+		if ctx.Err() == context.DeadlineExceeded {
+			http.Error(w, "request timedout", http.StatusRequestTimeout)
+			return
+		}
+	}
+}
+
+// Business Logic
+func GenerateGreet(ctx context.Context) string {
+	// simulate time consuming operation
+
+	for range 5 {
+		select {
+		case <-ctx.Done():
+			log.Println("[GenerateGreet] : request timedout")
+			return ""
+		default:
+			fmt.Print(".")
+			time.Sleep(time.Second)
+		}
+	}
+	return "Hello, World!"
+}
 
 func main() {
 	appServer := NewAppServer()
+	/*
+		appServer.AddHandler("/", logWrapper(timeoutWrapper(IndexHandler)))
+		appServer.AddHandler("/products", logWrapper(ProductsHandler))
+		appServer.AddHandler("/customers", logWrapper(CustomersHandler))
+	*/
+	appServer.AddMiddleware(logWrapper)
+	appServer.AddMiddleware(timeoutWrapper)
 	appServer.AddHandler("/", IndexHandler)
 	appServer.AddHandler("/products", ProductsHandler)
 	appServer.AddHandler("/customers", CustomersHandler)
