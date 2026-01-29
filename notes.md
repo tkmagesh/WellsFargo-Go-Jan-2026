@@ -307,3 +307,19 @@ data := <- ch
 
 ##### Channel Behavior
 ![image](./images/channel-operations.png)
+
+## Context
+- Used for `cancellation propagation` (manage cancel signaling across hierarchy of goroutines)
+- `context.Context` interface
+
+### `context` package APIs
+- `context.Background()`
+    - Used to create the `top most` context in the hierarchy
+    - Non cancellable
+- `context.WithCancel(ctx)`
+    - Creates a Programmatic cancellation
+- `context.WithTimeout(ctx, time.Duration)`
+    - Relative time based cancellation
+    - Wrapper on `context.WithDeadline()`
+- `context.WithDeadline(ctx, time.Time)`
+    - Relative time based cancellation
