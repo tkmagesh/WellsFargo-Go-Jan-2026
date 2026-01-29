@@ -339,3 +339,40 @@ data := <- ch
 
 ## Testing
 - gotest (https://github.com/rakyll/gotest)
+
+### Run the tests
+```shell
+go test ./... -v
+# OR
+gotest ./... -v
+# 
+go test -test.fullpath=true -timeout 30s -run ^Test_IsPrime$ testing-app/utils
+```
+
+## Benchmarking
+```shell
+go test -bench=. ./...
+```
+
+```shell
+go test -bench=. ./... -cpu=1,2,4,8
+```
+
+## Profiling
+### Memory Profiling
+```shell
+go test  -bench=. ./... -memprofile=<profile_file>  -cpu=1,2,4,8 -benchmem
+```
+
+### CPU Profiling
+```shell
+go test  -bench=. ./... -cpuprofile=<profile_file>  -cpu=1,2,4,8 -benchmem
+```
+
+### Analysing profile data
+go tool pprof <profile_file>
+
+#### pprof commands
+- top10
+- list <function_name>
+- web

@@ -43,3 +43,12 @@ func Test_IsPrime(t *testing.T) {
 		})
 	}
 }
+
+// Benchmark
+func Benchmark_GeneratePrimes(b *testing.B) {
+	// setup
+	for b.Loop() {
+		GeneratePrimes(2, 100)
+	}
+	// cleanup
+}
